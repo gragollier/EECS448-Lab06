@@ -28,6 +28,8 @@ private:
     bool test14();
     bool test15();
     bool test16();
+    bool test17();
+    bool test18();
 };
 
 #endif

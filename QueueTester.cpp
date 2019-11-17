@@ -13,7 +13,7 @@ QueueTester::~QueueTester() {
 void QueueTester::run() {
     std::cout<<"\n\nQueueTester is running\n\n";
 
-    int totalTests = 16;
+    int totalTests = 18;
     int passedTests = 0;
     // New Queue is Empty
     passedTests += test01();
@@ -62,6 +62,12 @@ void QueueTester::run() {
 
     // Dequeue from multi-element is non-empty
     passedTests += test16();
+
+    // Enqueue doesn't affect front value
+    passedTests += test17();
+
+    // Dequeue only remove one value from the front
+    passedTests += test18();
 
     std::cout<<"\n\n\n............................\n";
     std::cout<<"Passed: "<<passedTests<<" tests out of "<<totalTests<<". ("<< ((float)passedTests * 100) / ((float)totalTests)<<"% Passing)\n";
@@ -278,6 +284,34 @@ bool QueueTester::test16() {
         return true;
     } else {
         std::cout<<"Failed. Dequeing once from multi-element is empty\n";
+        return false;
+    }
+}
+
+bool QueueTester::test17() {
+    Queue queue;
+    queue.enqueue(0);
+    queue.enqueue(1);
+    queue.enqueue(2);
+    if (queue.peekFront() == 0) {
+        std::cout<<"Passed. Enqueue doesn't affect front of queue\n";
+        return true;
+    } else {
+        std::cout<<"Failed. Enqueue affects front of queue\n";;
+        return false;
+    }
+}
+
+bool QueueTester::test18() {
+    Queue queue;
+    queue.enqueue(0);
+    queue.enqueue(1);
+    queue.dequeue();
+    if (queue.peekFront() == 1) {
+        std::cout<<"Passed. Dequeue removes one element from front of list\n";
+        return true;
+    } else {
+        std::cout<<"Failed. Dequeue did not remove one element from front\n";
         return false;
     }
 }
