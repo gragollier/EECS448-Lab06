@@ -13,9 +13,9 @@ QueueTester::~QueueTester() {
 void QueueTester::run() {
     std::cout<<"\n\nQueueTester is running\n\n";
 
-    int totalTests = 13;
+    int totalTests = 16;
     int passedTests = 0;
-    // Empty Queue is Empty
+    // New Queue is Empty
     passedTests += test01();
 
     // Singleton is non empty
@@ -53,6 +53,15 @@ void QueueTester::run() {
 
     // isEmpty is const
     passedTests += test13();
+
+    // Enqueue adds node to back of list
+    passedTests += test14();
+
+    // Enqueue adds to back of singleton list
+    passedTests += test15();
+
+    // Dequeue from multi-element is non-empty
+    passedTests += test16();
 
     std::cout<<"\n\n\n............................\n";
     std::cout<<"Passed: "<<passedTests<<" tests out of "<<totalTests<<". ("<< ((float)passedTests * 100) / ((float)totalTests)<<"% Passing)\n";
@@ -234,4 +243,41 @@ bool QueueTester::test13() {
     }
     std::cout<<"Failed. Checking isEmpty on queue causes stored values to change\n";
     return false;
+}
+
+bool QueueTester::test14() {
+    Queue queue;
+    queue.enqueue(0);
+    queue.enqueue(1);
+    if (queue.peekFront() == 0) {
+        std::cout<<"Passed. Enqueue adds to back of list \n";
+        return true;
+    } else {
+        std::cout<<"Failed. Enqueue adds to back of list \n";
+        return false;
+    }
+}
+
+bool QueueTester::test15() {
+    Queue queue;
+    queue.enqueue(1);
+    if (queue.peekFront() == 1) {
+        std::cout<<"Passed. Queue enqueues to back of singleton list\n";
+        return true;
+    } else {
+        std::cout<<"Failed. Queue does not enqueue to back of singleton list\n";
+        return false;
+    }
+}
+
+bool QueueTester::test16() {
+    Queue queue = buildStackQueue(2);
+    queue.dequeue();
+    if (!queue.isEmpty()) {
+        std::cout<<"Passed. Dequeuing once from multi-element queue is non-empty\n";
+        return true;
+    } else {
+        std::cout<<"Failed. Dequeing once from multi-element is empty\n";
+        return false;
+    }
 }

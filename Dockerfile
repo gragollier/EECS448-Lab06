@@ -1,4 +1,3 @@
 FROM ubuntu
 
-RUN apt-get update && echo "Cache Busting"
-RUN apt-get install -y make g++
+RUN apt-get update && apt-get install -y make g++ valgrind

@@ -1,3 +1,4 @@
 1. The Queue seems to behave as a stack. See test10. The Queue will dequeue values in a LIFO order instead of FIFO how a queue should be.
     - i.e. The queue is either enqueuing on the front or dequeuing from the back
-2. 
+2. The destructor of the Queue seems to not be working since valgrind reports memory leaks after just constructing a Queue and inserting a single element
+    However, dequeue seems to be properly deleting nodes, so the issue is most likely just with the destructor.
